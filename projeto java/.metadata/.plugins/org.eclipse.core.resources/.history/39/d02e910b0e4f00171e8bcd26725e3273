@@ -1,0 +1,53 @@
+import java.util.List;
+
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
+/**
+ * Implentação dos métodos para leitura dos dados do twitter
+ * @author André Oliveira
+ */
+public class TwitterAPI {
+
+	public String getLastTweet()
+	{	
+		//////////////////////////////////
+		// Busca pelos ultimos 100 tweet's
+		//////////////////////////////////
+		
+		// configuração de autenticação
+		ConfigurationBuilder cb_ = new ConfigurationBuilder();
+		cb_.setDebugEnabled(true)
+		.setOAuthConsumerKey("mh9Xu2es833iwrPe2zKSclA0t")
+		.setOAuthConsumerSecret("XQMxg6osgdAQWtlPU1ipsi0FBPl7YLHl9PtJOpnyJG2YWwA3ps")
+		.setOAuthAccessToken("873392543953715202-Q3rhLtTWfkTZQgCmYATPPqJOwvafvrS")
+		.setOAuthAccessTokenSecret("nH6yxkAuT9puFEzikWs6GOCUxxuEbFQwjQHz3qbihQ28B");
+    	
+        Twitter twitterSearch = new TwitterFactory(cb_.build()).getInstance();
+        try 
+        {
+        	for(int i = 0; i < keyWords.length; i++)
+        	{
+        		Query querySearch = new Query(keyWords[i]);
+        		querySearch.count(100);
+        		QueryResult resultSearch = twitterSearch.search(querySearch);
+        		List<Status> tweets = resultSearch.getTweets();
+        		for (Status tweetSearch : tweets) {
+        			System.out.println(params[0] + "@" + tweetSearch.getUser().getScreenName() + 
+        							   params[1] + tweetSearch.getText() + 
+        							   params[2] + tweetSearch.getId());
+        		}
+                
+        	}
+        } catch (TwitterException err) {
+            err.printStackTrace();
+            System.out.println("Falha ao pesquisar pelo tweet: " + err.getMessage());
+        }
+
+	}
+}

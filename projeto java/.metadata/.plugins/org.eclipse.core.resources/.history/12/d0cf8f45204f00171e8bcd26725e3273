@@ -1,0 +1,86 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/**
+ * classe responsavel por fazer toda a leitura e escrita nos arquivos.
+ * @author André Oliveira
+ */
+public class TwitterFile {
+	
+	private String[] params;
+	private String filePath;
+	
+	public TwitterFile(String[] params_, String name)
+	{
+		params = params_;
+		filePath =  System.getProperty("user.dir") + "\\" + name;
+	}
+	
+	boolean alreadySaved(long id)
+	{
+		
+		return false;
+	}
+	
+	/**
+	 * Escreve um texto no arquivo especificado
+	 * @param fileName - nome do arquivo
+	 * @param Text - texto a ser escrito
+	 */
+	public static void writeFile(String fileName, String text)
+	{
+		String filePath =  System.getProperty("user.dir") + "\\" + fileName;
+		fileExists(filePath);
+		
+		// lê os valores atuais do texto
+		String current = "";
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader(filePath));
+			String line;
+			while ((line = br.readLine()) != null) {
+				current += line;
+			}
+			br.close();
+		}catch(Exception err){}
+		
+		// escreve no arquivo texto, mantendo os registros que ja estao lá
+		try{
+			PrintWriter writer = new PrintWriter(filePath, "UTF-8");
+			String newText = text + current;
+			String allLines[] =  newText.split("\n");
+			for(int i = 0; i < allLines.length; i++)
+			{
+				writer.println(allLines[i]);
+			}
+			writer.close();
+		}catch(Exception err){}
+	}
+	
+	private static void println(String text, String filePath)
+	{
+		try{
+
+		}catch(Exception err){}
+	}
+	/**
+	 * verifica se o arquivo existe, e cria caso não exista
+	 * @param filePath - caminho do arquivo
+	 */
+	private static void fileExists(String filePath)
+	{
+		File f = new File(filePath);
+		
+		// verifica se o arquivo ja existe, caso contrario,cria.
+		try
+		{
+			if(!f.exists() && !f.isFile()) {
+				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
+			}
+		}catch(Exception err){}
+	}
+}
