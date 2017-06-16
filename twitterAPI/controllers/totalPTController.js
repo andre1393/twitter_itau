@@ -1,5 +1,5 @@
 var TotalPT = require('../models/totalPT');
-var tweetsPT = require('./../../projeto java/TwitterReadAPI/totalPT.json');
+var tweetsPT = require('./../../totalPT.json');
 
 exports.save = function(hashTag, total, totalPT, callback){
 	new TotalPT({

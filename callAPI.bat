@@ -1,4 +1,12 @@
 @echo off
+start startMongod.bat
+chcp 65001
+echo salvando arquivos json
+java -jar "%cd%\projeto java\TwitterReadAPI\app.jar"
+echo arquivos json salvos
+start startNodemon.bat
+
+PAUSE
 :start
 CLS
 echo SELECIONE A SUA OPCAO:

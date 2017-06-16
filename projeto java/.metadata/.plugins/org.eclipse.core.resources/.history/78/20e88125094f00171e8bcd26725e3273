@@ -1,7 +1,0 @@
-/**
- * classe responsavel por fazer toda a leitura e escrita nos arquivos.
- * @author André Oliveira
- */
-public class TwitterFile {
-
-}

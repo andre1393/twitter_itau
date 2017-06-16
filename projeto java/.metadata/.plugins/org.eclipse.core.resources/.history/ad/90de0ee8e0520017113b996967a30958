@@ -42,8 +42,13 @@ public class TwitterFile {
 	 */
 	public static void writeFile(String fileName, String text, boolean Json, boolean endJson)
 	{
-		String filePath =  System.getProperty("user.dir") + "\\" + fileName;
-		
+		String filePath =  "";
+		try{
+			Path currentRelativePath = Paths.get("");
+			filePath = currentRelativePath.toAbsolutePath().toString();
+			//System.getProperty("user.dir") + "\\" + fileName;
+			System.out.println(filePath);
+		}catch(Exception err){}
 		fileExists(filePath);
 		
 		// lê os valores atuais do texto

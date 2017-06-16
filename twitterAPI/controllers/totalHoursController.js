@@ -1,5 +1,5 @@
 var TotalHours = require('../models/totalHours');
-var tweetsHour = require('./../../projeto java/TwitterReadAPI/totalHours.json');
+var tweetsHour = require('./../../totalHours.json');
 
 exports.save = function(hour, total, callback){
 	new TotalPT({

@@ -32,7 +32,6 @@ public class TwitterFile {
 	    	}catch(Exception e){}
 		}
 	}
-	
 	/**
 	 * Escreve um texto no arquivo especificado
 	 * @param fileName - nome do arquivo
@@ -43,7 +42,6 @@ public class TwitterFile {
 	public static void writeFile(String fileName, String text, boolean Json, boolean endJson)
 	{
 		String filePath =  System.getProperty("user.dir") + "\\" + fileName;
-		
 		fileExists(filePath);
 		
 		// lê os valores atuais do texto

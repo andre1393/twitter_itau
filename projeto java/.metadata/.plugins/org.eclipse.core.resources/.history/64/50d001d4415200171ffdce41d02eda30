@@ -89,7 +89,7 @@ public class Main {
 		System.out.println("fim do programa.");
 		//twitterAPI.startStreaming(keyWords, fullFileName); 
 		
-		System.exit(1);
+		return 1;
 	}
 	
 	/**

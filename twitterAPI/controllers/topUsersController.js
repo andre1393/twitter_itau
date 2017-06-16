@@ -1,5 +1,5 @@
 var TopUsers = require('../models/topUsers');
-var users = require('./../../projeto java/TwitterReadAPI/topUsers.json');
+var users = require('./../../topUsers.json');
 
 exports.save = function(userName, followers, callback){
 	new TopUsers({
