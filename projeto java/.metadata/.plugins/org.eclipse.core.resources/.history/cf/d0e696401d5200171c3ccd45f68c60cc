@@ -1,0 +1,17 @@
+
+public class TweetResult {
+	private String search;
+	private int total;
+	private int totalPT;
+	
+	public TweetResult(String s, int t, int tPT)
+	{
+		search = s;
+		total = t;
+		totalPT = tPT;
+	}
+	
+	public String getSearch(){return search;}
+	public int getTotalPT(){return totalPT;}
+
+}

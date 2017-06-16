@@ -1,0 +1,9 @@
+
+public class twitterUser {
+	List<String> listUsers;
+	
+	public twitterUser(){
+		listUsers = new List<String>();
+	}
+	
+}

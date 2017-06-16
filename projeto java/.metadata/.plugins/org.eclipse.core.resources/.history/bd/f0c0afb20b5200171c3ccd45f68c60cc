@@ -1,0 +1,27 @@
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import twitter4j.User;
+
+/**
+ * Classe responsavel por gerar as tres listas sumarizadas
+ * @author André Oliveira
+ *
+ */
+public class Reports {
+	public Reports(){}
+	
+	public void getTop5Users(List<User> users)
+	{
+		// Sorting
+		Collections.sort(users, new Comparator<User>() {
+		        @Override
+		        public int compare(User user2, User user1)
+		        {
+
+		            return  user1.getFollowersCount().compareTo(user2.getFollowersCount());
+		        }
+		    });
+	}
+}

@@ -1,0 +1,91 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+/**
+ * classe responsavel por fazer toda a leitura e escrita nos arquivos.
+ * @author André Oliveira
+ */
+public class TwitterFile {
+	
+	/**
+	 * construtor padrão
+	 */
+	public TwitterFile(){}
+	
+	
+	/**
+	 * Escreve um texto no arquivo especificado
+	 * @param fileName - nome do arquivo
+	 * @param Text - texto a ser escrito
+	 * @param Json - indica se o arquivo a ser gravado é em estrutura json
+	 * @param endJson - indica se deve encerrar o arquivo json (com um ']') ou não
+	 */
+	public static void writeFile(String fileName, String text, boolean Json, boolean endJson)
+	{
+		String filePath =  System.getProperty("user.dir") + "\\" + fileName;
+		fileExists(filePath);
+		
+		// lê os valores atuais do texto
+		String current = "";
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader(filePath));
+			String line;
+			while ((line = br.readLine()) != null) {
+				current += line + "\n";
+			}
+			br.close();
+		}catch(Exception err){}
+		
+		// se é um arquivo json e ele esta vazio entao inicia ele com o '['
+		if(current.equals("") && Json)
+		{
+			current += "[\n";
+		}
+		
+		// escreve no arquivo texto, mantendo os registros que ja estao lá
+		try{
+			PrintWriter writer = new PrintWriter(filePath, "ASCII");
+			String newText = current + "\n" + text;
+			String allLines[] =  newText.split("\n");
+			for(int i = 0; i < allLines.length; i++)
+			{
+				writer.println(allLines[i]);
+			}
+			
+			// se é um arquivo tipo json e é o final dele, entao adiciona ']' para finalizar
+			if(endJson && Json)
+			{
+				writer.println("]");
+			}
+			// se é um arquivo, mas nao é o final dele, entao apenas 
+			//insere uma ',' para posteriormente poder ser escrito mais dados
+			else if(!endJson && Json){
+				writer.println(",");
+			}
+			writer.close();
+		}catch(Exception err){}
+	}
+	
+	/**
+	 * verifica se o arquivo existe, e cria caso não exista
+	 * @param filePath - caminho do arquivo
+	 */
+	private static void fileExists(String filePath)
+	{
+		File f = new File(filePath);
+		
+		// verifica se o arquivo ja existe, caso contrario,cria.
+		try
+		{
+			if(!f.exists() && !f.isFile()) {
+				PrintWriter writer = new PrintWriter(filePath, "UTF-8");
+			}
+		}catch(Exception err){}
+	}
+}

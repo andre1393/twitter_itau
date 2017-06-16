@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="twitter4j.TwitterFactory"/>
 <fullyQualifiedTypeName name="twitter4j.conf.ConfigurationBuilder"/>
 <fullyQualifiedTypeName name="java.util.Queue"/>
 <fullyQualifiedTypeName name="java.util.concurrent.LinkedBlockingQueue"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="java.nio.file.Files"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.nio.file.Paths"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="twitter4j.Status"/>
+<fullyQualifiedTypeName name="twitter4j.StreamController.User"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="twitter4j.User"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
 </qualifiedTypeNameHistroy>

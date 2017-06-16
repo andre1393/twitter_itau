@@ -23,15 +23,20 @@ public class TwitterAPI {
 	
 	ConfigurationBuilder cb; // configuration builder para a busca por ultimas #tags
 	ConfigurationBuilder cb_stream; // configuration builder para a busca por stream
-	String params[]; // parametros que serão salvos
 	Twitter twitterSearch; // objeto responsavel pela busca pelas ultimas #tags
 	TwitterStream twitterStream; // objeto responsavel pela busca por stream
 	
+	/**
+	 * Construtor recebe os valores de autenticação e os parametros a serem buscados
+	 * @param consumerKey - chave de autenticação
+	 * @param consumerSecret - chave de autenticação
+	 * @param accessToken - chave de autenticação
+	 * @param accessTokenSecret - chave de autenticação
+	 * @param params_
+	 */
 	public TwitterAPI(String consumerKey, String consumerSecret, 
-					  String accessToken, String accessTokenSecret, 
-					  String[] params_)
+					  String accessToken, String accessTokenSecret)
 	{
-		params = params_;
 		cb = new ConfigurationBuilder();
 		cb_stream = new ConfigurationBuilder();
 		
@@ -57,9 +62,11 @@ public class TwitterAPI {
 	 * @param key - #tag a ser buscada
 	 * @return uma string contendo todos os resultados da busca, separados por parametros
 	 */
-	public String getLastTweet(String key)
+	public TweetResult getLastTweet(String key, String[] params, twitterUser users, int[] totalHours)
 	{	
-		String searchResult = ""; // resultado da busca
+		String searchResult = ""; /// resultado da busca pela #tag
+		int totalPT = 0; /// total de tweets em portugues, por #tag
+		int total = 0; /// total de tweets por #tag
 		
         try 
         {
@@ -67,25 +74,42 @@ public class TwitterAPI {
         	querySearch.count(100); // quantidade maxima de resultados da busca
         	QueryResult resultSearch = twitterSearch.search(querySearch); // resultado da busca
         	List<Status> tweets = resultSearch.getTweets(); // lista com todos os tweets encontrados
+        	
+        	total = tweets.size();
+        	
+        	// monta uma string em formato json
         	for (Status tweetSearch : tweets) {
-        		searchResult += (params[0] + "@" + tweetSearch.getUser().getScreenName() + 
-        						 params[1] + tweetSearch.getText().replaceAll("\\n", "") + 
-        						 params[2] + tweetSearch.getId() +
-        						 params[3] + tweetSearch.getCreatedAt().getHours() + "\n");
-        	}        
+        		//adiciona o usuario à lista de usuarios, para mais tarde gerar a lista de usuarios com mais seguidores
+        		users.addUser(tweetSearch.getUser());
+        		
+        		// monta o resultado atual em formato json
+        		String[] values = {key, tweetSearch.getUser().getScreenName(), "" + tweetSearch.getCreatedAt().getHours()};
+        		searchResult += Support.getJson(params, values) + ",\n";
+        		
+        		// incrementa o total de tweets em portugues para a #tag pesquisada
+        		if(tweetSearch.getLang().equals("pt")) totalPT++;
+        		
+        		// incrementa a quantidade de tweets por hora
+        		try{
+        			int hour = tweetSearch.getCreatedAt().getHours();
+        			totalHours[hour]++; 
+        		}catch(Exception err){}
+        	}
+        	
+        	// retira a ultima virgula do json, para nao dar erro
+        	searchResult = searchResult.substring(0, searchResult.length() - 2); 
         }catch (TwitterException err) {
             err.printStackTrace();
-            System.out.println("Falha ao pesquisar pela #tag: " + err.getMessage());
         }
         
-        return searchResult;
+        return new TweetResult(key, searchResult, total, totalPT, totalHours);
 	}
 	
 	/**
 	 * inicia a aquisição dos tweets via streaming de acordo com as #tags passadas
 	 * @param keyWords - lista de #tags a serem monitoradas 
 	 */
-	public void startStreaming(String[] keyWords, String fullFileName)
+	public void startStreaming(String[] keyWords, String[] params, String fullFileName)
 	{
 		// listener para a mudança de status
 		StatusListener listener = new StatusListener() {
@@ -120,7 +144,7 @@ public class TwitterAPI {
 						 params[2] + status.getId() +
 						 params[3] + status.getCreatedAt().getHours() + "\n");
         		
-        		TwitterFile.writeFile(fullFileName, searchResult);
+        		TwitterFile.writeFile(fullFileName, searchResult, true, true);
             }
 
             @Override

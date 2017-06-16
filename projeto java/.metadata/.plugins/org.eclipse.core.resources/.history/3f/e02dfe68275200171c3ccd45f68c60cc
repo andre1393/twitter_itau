@@ -1,0 +1,23 @@
+
+public class TweetResult {
+	private String tag;
+	private String search;
+	private int total;
+	private int totalPT;
+	private int[] totalHours;
+	
+	public TweetResult(String hashTag, String s, int t, int tPT, int[] h)
+	{
+		tag = hashTag;
+		search = s;
+		total = t;
+		totalPT = tPT;
+		totalHours = h;
+	}
+	
+	public String getHashTag(){return tag;}
+	public String getSearch(){return search;}
+	public int getTotalPT(){return totalPT;}
+	public int getTotal(){return total;}
+	public int getTotalHours(){return[] totalHours;}
+}

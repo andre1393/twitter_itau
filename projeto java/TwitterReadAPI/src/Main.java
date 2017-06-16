@@ -13,31 +13,74 @@ import twitter4j.*;
 public class Main {
 
 	private static String[] keyWords;/// contém as #tags que serão pesquisadas
-	private static String[] params = {"-user: ", "-text: ", "-id: ", "-time: "}; /// paramtros que serão salvos
-	private static String fullFileName = "allHashTags.txt";
+	private static String[] params = {"hashTag", "userName", "time"}; /// parametros que serão salvos
+	private static String fullFileName = "allHashTags.json"; /// arquivo onde serao gravadas todas as #tags
+
+	private static String[] topNparams = {"userName", "followers"}; /// parametros da lista top N usuarios
+	private static String[] topTagsParams = {"hashTag", "total", "totalPT"}; /// parametros da lista total de #tags
+	private static String[] topHourParams = {"hour", "total"};/// parametros da lista total #tags por hora
+	
 	/**
 	 * método main do programa
 	 * @param args - parametros de linha de comando
 	 */
 	public static void main(String args[])
 	{
-		keyWords = getHashTagList(args);
+		keyWords = getHashTagList(args);/// lista de #tags
+		twitterUser users = new twitterUser(); /// lista de usuarios criadores das #tags buscadas
+		int[] arrayHours = new int[24];/// array que contem o total de tweets por hora do dia (uma posição para cada hora do dia)
 		
 		String[] tokens = {"mh9Xu2es833iwrPe2zKSclA0t", 
 				           "XQMxg6osgdAQWtlPU1ipsi0FBPl7YLHl9PtJOpnyJG2YWwA3ps",
 				           "873392543953715202-Q3rhLtTWfkTZQgCmYATPPqJOwvafvrS",
 				           "nH6yxkAuT9puFEzikWs6GOCUxxuEbFQwjQHz3qbihQ28B"}; // chaves de segurança
 		
-		TwitterAPI twitterAPI = new TwitterAPI(tokens[0], tokens[1], tokens[2], tokens[3], params);
+		// objeto que realiza a busca de #tags no twitter
+		TwitterAPI twitterAPI = new TwitterAPI(tokens[0], tokens[1], tokens[2], tokens[3]);
 		
+		// objeto que contem o resultado das buscas de cada #tag
+		List<TweetResult> allResult = new ArrayList<TweetResult>();
+		
+		// realiza uma busca para cada uma das #tags indicadas
 		for(int i = 0; i < keyWords.length; i++)
 		{
-			String hashTags = twitterAPI.getLastTweet(keyWords[i]);
-			TwitterFile.writeFile(keyWords[i].replace('#', '_') + ".txt", hashTags);
-			TwitterFile.writeFile(fullFileName, hashTags);
+			// lista de tweets para a #tag buscada
+			allResult.add(twitterAPI.getLastTweet(keyWords[i], params, users, arrayHours)); 
+			String tweets = allResult.get(allResult.size() - 1).getSearch();
+			
+			// o trecho a seguir cria um arquivo contendo o resultado de cada busca, e um que contem todos juntos
+			// como esses arquivos nao sao necessarios, esse trecho esta comentado
+			
+			/*
+			// escreve os tweets dessa #tag em um arquivo json
+			TwitterFile.writeFile(keyWords[i].replace('#', '_') + ".json", tweets, true, true);
+			
+			boolean endFile;
+			if(i == (keyWords.length - 1))endFile = true;
+			else endFile = false;
+			
+			// escreve todos tweets em um unico arquivo
+			TwitterFile.writeFile(fullFileName, tweets, true, endFile);
+			*/
 		}
 		
-		twitterAPI.startStreaming(keyWords, fullFileName);        
+		Reports r = new Reports(topNparams, topTagsParams, topHourParams);/// objeto que gera as listas desejadas
+		
+		// lista dos top 5 usuarios com mais seguidores e salva em um arquivo json
+		String top5 = r.getTopNUsers(users.getUsers(), 5);
+		TwitterFile.writeFile("topUsers.json", top5, true, true);
+		
+		// lista o total de tweets em portugues por #tag e salva em um arquivo json
+		String totalPT = r.getTotalPT(allResult);
+		TwitterFile.writeFile("totalPT.json", totalPT, true, true);
+		
+		// lista o total de tweets por hora do dia e salva em um arquivo json
+		String totalHours = r.getTotalHours(arrayHours);
+		TwitterFile.writeFile("totalHours.json", totalHours, true, true);
+		
+		
+		System.out.println("fim do programa.");
+		//twitterAPI.startStreaming(keyWords, fullFileName);        
 	}
 	
 	/**

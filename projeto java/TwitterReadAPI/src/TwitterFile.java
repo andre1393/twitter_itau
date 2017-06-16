@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * classe responsavel por fazer toda a leitura e escrita nos arquivos.
@@ -11,27 +12,20 @@ import java.nio.file.Path;
  */
 public class TwitterFile {
 	
-	private String[] params;
-	private String filePath;
+	/**
+	 * construtor padrão
+	 */
+	public TwitterFile(){}
 	
-	public TwitterFile(String[] params_, String name)
-	{
-		params = params_;
-		filePath =  System.getProperty("user.dir") + "\\" + name;
-	}
-	
-	boolean alreadySaved(long id)
-	{
-		
-		return false;
-	}
 	
 	/**
 	 * Escreve um texto no arquivo especificado
 	 * @param fileName - nome do arquivo
 	 * @param Text - texto a ser escrito
+	 * @param Json - indica se o arquivo a ser gravado é em estrutura json
+	 * @param endJson - indica se deve encerrar o arquivo json (com um ']') ou não
 	 */
-	public static void writeFile(String fileName, String text)
+	public static void writeFile(String fileName, String text, boolean Json, boolean endJson)
 	{
 		String filePath =  System.getProperty("user.dir") + "\\" + fileName;
 		fileExists(filePath);
@@ -43,30 +37,41 @@ public class TwitterFile {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
 			String line;
 			while ((line = br.readLine()) != null) {
-				current += line;
+				current += line + "\n";
 			}
 			br.close();
 		}catch(Exception err){}
 		
+		// se é um arquivo json e ele esta vazio entao inicia ele com o '['
+		if(current.equals("") && Json)
+		{
+			current += "[";
+		}
+		
 		// escreve no arquivo texto, mantendo os registros que ja estao lá
 		try{
-			PrintWriter writer = new PrintWriter(filePath, "UTF-8");
-			String newText = text + "\n" +current;
+			PrintWriter writer = new PrintWriter(filePath, "ASCII");
+			String newText = current + "\n" + text;
 			String allLines[] =  newText.split("\n");
 			for(int i = 0; i < allLines.length; i++)
 			{
 				writer.println(allLines[i]);
 			}
+			
+			// se é um arquivo tipo json e é o final dele, entao adiciona ']' para finalizar
+			if(endJson && Json)
+			{
+				writer.println("]");
+			}
+			// se é um arquivo, mas nao é o final dele, entao apenas 
+			//insere uma ',' para posteriormente poder ser escrito mais dados
+			else if(!endJson && Json){
+				writer.println(",");
+			}
 			writer.close();
 		}catch(Exception err){}
 	}
 	
-	private static void println(String text, String filePath)
-	{
-		try{
-
-		}catch(Exception err){}
-	}
 	/**
 	 * verifica se o arquivo existe, e cria caso não exista
 	 * @param filePath - caminho do arquivo

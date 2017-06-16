@@ -1,7 +1,0 @@
-/**
- * Implentação dos métodos para leitura dos dados do twitter
- * @author André Oliveira
- */
-public class TwitterAPI {
-
-}

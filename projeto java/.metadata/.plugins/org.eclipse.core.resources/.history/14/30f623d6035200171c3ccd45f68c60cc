@@ -1,0 +1,13 @@
+/**
+ * Classe responsavel por gerar as tres listas sumarizadas
+ * @author André Oliveira
+ *
+ */
+public class Reports {
+	public Reports(){}
+	
+	public void String getTop5Users()
+	{
+		
+	}
+}

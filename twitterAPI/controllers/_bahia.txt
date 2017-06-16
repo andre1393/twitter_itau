@@ -1,5 +1,0 @@
-﻿{
-	nome: '@FCPFAMANHECER3', 
-	descricao: 'RT @PFMinhaPiracao Xique-Xique explodiu!!! #paulafernandes #turneamanhecer #bahia',
-	valor: '0'
-}

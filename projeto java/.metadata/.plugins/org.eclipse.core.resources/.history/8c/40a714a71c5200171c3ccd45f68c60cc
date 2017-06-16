@@ -1,0 +1,104 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.*;
+
+/**
+ * classe principal do projeto
+ * @author André Oliveira da Silva
+ */
+public class Main {
+
+	private static String[] keyWords;/// contém as #tags que serão pesquisadas
+	private static String[] params = {/*"user: ", "text: ", "id: ", "time: "*/"nome", "produto", "valor"}; /// parametros que serão salvos
+	private static String fullFileName = "allHashTags.json"; /// arquivo onde serao gravadas todas as #tags
+
+	private static String[] topNparams = {"userName", "followers"}; /// parametros da lista top N usuarios
+	private static String[] topTagsParams = {"hashTag", "total"}; /// parametros da lista total de #tags
+	private static String[] topHourParams = {"hora", "total"};/// parametros da lista total #tags por hora
+	
+	/**
+	 * método main do programa
+	 * @param args - parametros de linha de comando
+	 */
+	public static void main(String args[])
+	{
+		keyWords = getHashTagList(args);// lista de #tags
+		twitterUser users = new twitterUser(); // lista de usuarios criadores das #tags buscadas
+		
+		String[] tokens = {"mh9Xu2es833iwrPe2zKSclA0t", 
+				           "XQMxg6osgdAQWtlPU1ipsi0FBPl7YLHl9PtJOpnyJG2YWwA3ps",
+				           "873392543953715202-Q3rhLtTWfkTZQgCmYATPPqJOwvafvrS",
+				           "nH6yxkAuT9puFEzikWs6GOCUxxuEbFQwjQHz3qbihQ28B"}; // chaves de segurança
+		
+		// objeto que realiza a busca de #tags no twitter
+		TwitterAPI twitterAPI = new TwitterAPI(tokens[0], tokens[1], tokens[2], tokens[3], params);
+		
+		// realiza uma busca para cada uma das #tags indicadas
+		for(int i = 0; i < keyWords.length; i++)
+		{
+			// lista de tweets para a #tag buscada
+			int t = 0;
+			TweetResult resul = twitterAPI.getLastTweet(keyWords[i], users); 
+			String tweets = resul.getSearch();
+			
+			System.out.println(t);
+
+			// escreve os tweets dessa #tag em um arquivo json
+			TwitterFile.writeFile(keyWords[i].replace('#', '_') + ".json", tweets, true, true);
+			
+			boolean endFile;
+			if(i == (keyWords.length - 1))endFile = true;
+			else endFile = false;
+			
+			// escreve todos tweets em um unico arquivo
+			TwitterFile.writeFile(fullFileName, tweets, true, endFile);
+		}
+		
+		Reports r = new Reports(topNparams, topTagsParams, topHourParams);/// objeto que gera as listas desejadas
+		
+		String top5 = r.getTopNUsers(users.getUsers(), 5);/// lista dos top 5 usuarios com mais seguidores
+		TwitterFile.writeFile("topUsers.json", top5, true, true);
+		
+		//twitterAPI.startStreaming(keyWords, fullFileName);        
+	}
+	
+	/**
+	 * retorna as #tags que serao buscadas
+	 * @param args - argumentos passados na inicialização do prgrama
+	 * @return - lista string com as #tags
+	 */
+	public static String[] getHashTagList(String[] args)
+	{
+		List<String> list = new ArrayList<String>();/// lista que contem as keyWords
+		String[] keys;
+		// os parametros passados para atribuir aos keyWords
+		if(args.length > 0)
+		{
+			for(int i = 0; i < args.length; i++)
+			{
+				list.add(args[i]);
+			}
+			keys = new String[list.size()];
+			keys = list.toArray(keys);			
+		}else{// se nao tiver nenhum parametro, mantem as chaves padrão.
+			list.add("#brasil");
+			list.add("#brazil");
+			list.add("#brasil2017");
+			list.add("#brazil2017");
+			list.add("#carnaval");
+			list.add("#tourism");
+			list.add("#bahia");
+			list.add("#riodejaneiro");
+			list.add("#saopaulo");
+			
+			keys = new String[list.size()];
+			keys = list.toArray(keys);
+		}
+		
+		return keys;
+	}
+}

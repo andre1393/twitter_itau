@@ -1,32 +1,35 @@
 var app = require('./config/app_config');
 var db = require('./config/db_config');
-var User = require('./models/produto');
-var produtoController = require('./controllers/produtoController');
+
+var TopUsers = require('./models/topUsers');
+var TotalHours = require('./models/totalHours');
+var TotalPT = require('./models/totalPT');
+
+var topUsersController = require('./controllers/topUsersController');
+var totalPTController = require('./controllers/totalPTController');
+var totalHoursController = require('./controllers/totalHoursController');
 
 app.get('/', function(req, res){
 	res.end('Bem-vindo a API de produtos');
 });
 
-//rotas de produtos
-app.get('/produtos', function(req, res){
-	produtoController.list(function(resp){
+//rotas de total de tweets por hora
+app.get('/totalHours', function(req, res){
+	totalHoursController.list(function(resp){
 		res.json(resp);
 	})
 });
 
-app.post('/cadastro', function(req, res){
-	var nome = req.body.nome;
-	var descricao = req.body.descricao;
-	var valor = req.body.valor;
-	produtoController.save(nome, descricao, valor, function(resp){
+//rotas de top usuarios
+app.get('/topUsers', function(req, res){
+	topUsersController.list(function(resp){
 		res.json(resp);
 	})
 });
 
-app.delete('/deletar/:id', function(req, res){
-	var id = req.params.id;
-	
-	produtoController.delete(id, function(resp){
+//rotas de total de Tags em PT
+app.get('/totalPT', function(req, res){
+	totalPTController.list(function(resp){
 		res.json(resp);
-	});
+	})
 });

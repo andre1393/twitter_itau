@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class twitterUser {
+	private List<String> listUsers;
+	
+	public twitterUser(){
+		listUsers = new ArrayList<String>();
+	}
+	
+	public void addUser(String userName)
+	{
+		boolean exists = false;
+		for(int i = 0; i < listUsers.size() && !exists; i++)
+		{
+			if(listUsers.get(i).equals(userName)) exists = true;
+		}
+		
+		if(!exists) listUsers.add(userName);
+	}
+	
+	public String getUsers()
+	{
+		String users = "";
+		for(String user:listUsers)
+		{
+			users += user + "\n";
+		}
+	}
+	public void listUsers()
+	{
+		for(String userName: listUsers)
+		{
+			System.out.println(userName);
+		}
+	}
+	
+}

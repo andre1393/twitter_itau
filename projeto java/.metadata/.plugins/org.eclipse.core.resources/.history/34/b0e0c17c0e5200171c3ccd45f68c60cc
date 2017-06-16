@@ -1,0 +1,19 @@
+
+public class Support {
+	public Support(){}
+	
+	public static String getJson(String[] params, String[] values){
+		String json = "{\n\t";
+		for(int i = 0; i < params.length && i < values.length; i++)
+		{
+			json += "\"" + params[i] + "\": \"" + values[i];
+			if(i < params.length - 1 && i < values.length - 1)
+			{
+				json += "\",\n\t";
+			}else{
+				json += "\"\n},\n";
+			}
+		}
+		return "";
+	}
+}

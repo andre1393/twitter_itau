@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="C:\Users\André Oliveira\Desktop\PROJETO_TWITTER\twitter4j-4.0.4\lib" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="filter_imports;" key="filters_last_used"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
