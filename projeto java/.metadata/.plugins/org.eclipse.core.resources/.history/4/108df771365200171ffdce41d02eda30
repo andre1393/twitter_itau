@@ -17,21 +17,7 @@ public class TwitterFile {
 	 */
 	public TwitterFile(){}
 	
-	/**
-	 * Ao iniciar o programa, deleta os arquivos json para evitar que eles se sobreescrevam
-	 * @param files - lista de arquivos a serem excluidos
-	 */
-	public static void deleteFiles(String[] files)
-	{
-		for(String fileName:files)
-		{
-	    	try{
-
-	    		File file = new File(System.getProperty("user.dir") + "\\" + fileName);
-	    		file.delete();
-	    	}catch(Exception e){}
-		}
-	}
+	
 	/**
 	 * Escreve um texto no arquivo especificado
 	 * @param fileName - nome do arquivo

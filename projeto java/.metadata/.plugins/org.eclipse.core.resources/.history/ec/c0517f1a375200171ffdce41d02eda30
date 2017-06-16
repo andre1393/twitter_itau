@@ -29,10 +29,6 @@ public class Main {
 	 */
 	public static void main(String args[])
 	{
-		// deleta os arquivos json para evitar que eles sejam sobreescritos
-		String[] files = {topUsersFile, totalPTFile, totalHoursFile};
-		TwitterFile.deleteFiles(files);
-		
 		keyWords = getHashTagList(args);/// lista de #tags
 		twitterUser users = new twitterUser(); /// lista de usuarios criadores das #tags buscadas
 		int[] arrayHours = new int[24];/// array que contem o total de tweets por hora do dia (uma posição para cada hora do dia)

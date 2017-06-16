@@ -20,19 +20,15 @@ public class Main {
 	private static String[] topTagsParams = {"hashTag", "total", "totalPT"}; /// parametros da lista total de #tags
 	private static String[] topHourParams = {"hour", "total"};/// parametros da lista total #tags por hora
 	
-	private static String topUsersFile = "topUsers.json";///nome do arquivo que armazena os usuarios com mais seguidores
-	private static String totalPTFile = "totalPT.json";/// nome do arquivo que armazena a quantidade de tweets em portugues
-	private static String totalHoursFile = "totalHours.json";/// nome do arquivo que armazena a quantidade de tweets por hora
+	private static String topUsersFile = "topUsers.json";
+	private static String totalPTFile = "totalPT.json";
+	private static String totalHoursFile = "totalPT.json";
 	/**
 	 * método main do programa
 	 * @param args - parametros de linha de comando
 	 */
 	public static void main(String args[])
 	{
-		// deleta os arquivos json para evitar que eles sejam sobreescritos
-		String[] files = {topUsersFile, totalPTFile, totalHoursFile};
-		TwitterFile.deleteFiles(files);
-		
 		keyWords = getHashTagList(args);/// lista de #tags
 		twitterUser users = new twitterUser(); /// lista de usuarios criadores das #tags buscadas
 		int[] arrayHours = new int[24];/// array que contem o total de tweets por hora do dia (uma posição para cada hora do dia)

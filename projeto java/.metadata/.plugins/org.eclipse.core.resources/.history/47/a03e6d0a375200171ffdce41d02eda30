@@ -19,7 +19,7 @@ public class TwitterFile {
 	
 	/**
 	 * Ao iniciar o programa, deleta os arquivos json para evitar que eles se sobreescrevam
-	 * @param files - lista de arquivos a serem excluidos
+	 * @param files
 	 */
 	public static void deleteFiles(String[] files)
 	{

@@ -1,98 +1,98 @@
 [
 {
-	"hashTag": "0h",
+	"hour": "0h",
 	"total": "0"
 },
 {
-	"hashTag": "1h",
+	"hour": "1h",
 	"total": "0"
 },
 {
-	"hashTag": "2h",
+	"hour": "2h",
 	"total": "0"
 },
 {
-	"hashTag": "3h",
+	"hour": "3h",
 	"total": "0"
 },
 {
-	"hashTag": "4h",
+	"hour": "4h",
 	"total": "0"
 },
 {
-	"hashTag": "5h",
+	"hour": "5h",
 	"total": "0"
 },
 {
-	"hashTag": "6h",
+	"hour": "6h",
 	"total": "0"
 },
 {
-	"hashTag": "7h",
+	"hour": "7h",
 	"total": "6"
 },
 {
-	"hashTag": "8h",
+	"hour": "8h",
 	"total": "1"
 },
 {
-	"hashTag": "9h",
+	"hour": "9h",
 	"total": "1"
 },
 {
-	"hashTag": "10h",
-	"total": "2"
+	"hour": "10h",
+	"total": "1"
 },
 {
-	"hashTag": "11h",
+	"hour": "11h",
 	"total": "4"
 },
 {
-	"hashTag": "12h",
-	"total": "10"
+	"hour": "12h",
+	"total": "8"
 },
 {
-	"hashTag": "13h",
-	"total": "25"
+	"hour": "13h",
+	"total": "18"
 },
 {
-	"hashTag": "14h",
+	"hour": "14h",
 	"total": "22"
 },
 {
-	"hashTag": "15h",
+	"hour": "15h",
 	"total": "14"
 },
 {
-	"hashTag": "16h",
-	"total": "14"
+	"hour": "16h",
+	"total": "15"
 },
 {
-	"hashTag": "17h",
+	"hour": "17h",
 	"total": "25"
 },
 {
-	"hashTag": "18h",
-	"total": "28"
+	"hour": "18h",
+	"total": "11"
 },
 {
-	"hashTag": "19h",
-	"total": "72"
+	"hour": "19h",
+	"total": "31"
 },
 {
-	"hashTag": "20h",
-	"total": "185"
+	"hour": "20h",
+	"total": "111"
 },
 {
-	"hashTag": "21h",
-	"total": "395"
+	"hour": "21h",
+	"total": "175"
 },
 {
-	"hashTag": "22h",
-	"total": "3"
+	"hour": "22h",
+	"total": "328"
 },
 {
-	"hashTag": "23h",
+	"hour": "23h",
 	"total": "1"
 }
 ]

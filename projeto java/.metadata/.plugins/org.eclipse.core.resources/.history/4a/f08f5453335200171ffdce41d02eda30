@@ -111,7 +111,7 @@ public class Reports {
 			String[] values = {"" + i + "h" ,"" + arrayHours[i]};
 			
 			// transforma os parametros/valores em string (json)
-			totalHours += Support.getJson(totalHourParams, values);
+			totalHours += Support.getJson(totalTagParams, values);
 			
 			// adiciona a virgula apos cada um dos resultados, exceto no ultimo, que nao deve ter virgula
         	if(i < arrayHours.length - 1)

@@ -20,19 +20,12 @@ public class Main {
 	private static String[] topTagsParams = {"hashTag", "total", "totalPT"}; /// parametros da lista total de #tags
 	private static String[] topHourParams = {"hour", "total"};/// parametros da lista total #tags por hora
 	
-	private static String topUsersFile = "topUsers.json";///nome do arquivo que armazena os usuarios com mais seguidores
-	private static String totalPTFile = "totalPT.json";/// nome do arquivo que armazena a quantidade de tweets em portugues
-	private static String totalHoursFile = "totalHours.json";/// nome do arquivo que armazena a quantidade de tweets por hora
 	/**
 	 * método main do programa
 	 * @param args - parametros de linha de comando
 	 */
 	public static void main(String args[])
 	{
-		// deleta os arquivos json para evitar que eles sejam sobreescritos
-		String[] files = {topUsersFile, totalPTFile, totalHoursFile};
-		TwitterFile.deleteFiles(files);
-		
 		keyWords = getHashTagList(args);/// lista de #tags
 		twitterUser users = new twitterUser(); /// lista de usuarios criadores das #tags buscadas
 		int[] arrayHours = new int[24];/// array que contem o total de tweets por hora do dia (uma posição para cada hora do dia)
@@ -75,15 +68,15 @@ public class Main {
 		
 		// lista dos top 5 usuarios com mais seguidores e salva em um arquivo json
 		String top5 = r.getTopNUsers(users.getUsers(), 5);
-		TwitterFile.writeFile(topUsersFile, top5, true, true);
+		TwitterFile.writeFile("topUsers.json", top5, true, true);
 		
 		// lista o total de tweets em portugues por #tag e salva em um arquivo json
 		String totalPT = r.getTotalPT(allResult);
-		TwitterFile.writeFile(totalPTFile, totalPT, true, true);
+		TwitterFile.writeFile("totalPT.json", totalPT, true, true);
 		
 		// lista o total de tweets por hora do dia e salva em um arquivo json
 		String totalHours = r.getTotalHours(arrayHours);
-		TwitterFile.writeFile(totalHoursFile, totalHours, true, true);
+		TwitterFile.writeFile("totalHours.json", totalHours, true, true);
 		
 		
 		System.out.println("fim do programa.");

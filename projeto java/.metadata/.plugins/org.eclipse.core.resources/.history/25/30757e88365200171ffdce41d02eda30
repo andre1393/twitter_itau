@@ -17,19 +17,13 @@ public class TwitterFile {
 	 */
 	public TwitterFile(){}
 	
-	/**
-	 * Ao iniciar o programa, deleta os arquivos json para evitar que eles se sobreescrevam
-	 * @param files - lista de arquivos a serem excluidos
-	 */
 	public static void deleteFiles(String[] files)
 	{
-		for(String fileName:files)
+		for(String file:files)
 		{
-	    	try{
-
-	    		File file = new File(System.getProperty("user.dir") + "\\" + fileName);
-	    		file.delete();
-	    	}catch(Exception e){}
+			try {
+				Files.delete(new Path(file));
+			}
 		}
 	}
 	/**
