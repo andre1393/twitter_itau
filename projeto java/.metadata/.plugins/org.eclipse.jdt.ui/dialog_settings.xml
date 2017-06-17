@@ -2,6 +2,22 @@
 <section name="Workbench">
 	<item value="C:\Users\André Oliveira\Desktop\PROJETO_TWITTER\twitter4j-4.0.4\lib" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="filter_imports;" key="filters_last_used"/>
+	<section name="FatJarPackageWizard">
+		<item value="C:\Users\André Oliveira\Documents\twitter\projeto java" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="Main - TwitterReadAPI" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="TwitterReadAPI\app.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="TwitterReadAPI/app.jar"/>
+			<item value="TwitterReadAPI/bin/app.jar"/>
+			<item value="C:\Users\André Oliveira\Desktop\PROJETO_TWITTER\projeto java\TwitterReadAPI\bin\app.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value="C:\Users\André Oliveira\Documents\twitter\projeto java.xml"/>
+			<item value=".xml"/>
+		</list>
+	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>

@@ -1,0 +1,4 @@
+- o arquivo callAPI executa o programa java que coleta as informações do twitter e salva as 3 listas na pasta raiz
+- em seguida executa os arquivos startMongod e startNodemon que iniciam a conexão com banco de dados
+- em seguida apresenta um menu no prompt para o usuário escolher qual lista de deseja exibir
+- por fim, abre uma pagina web localhost:3000/ e traz os dados da lista em formato json
